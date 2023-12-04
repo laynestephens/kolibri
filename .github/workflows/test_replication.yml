@@ -3,7 +3,12 @@ name: Replicate KeyError Issue
 on:
   push:
     branches:
-      - main
+    - develop
+    - 'release-v**'
+  pull_request:
+    branches:
+    - develop
+    - 'release-v**'
 
 jobs:
   replicate_issue:
