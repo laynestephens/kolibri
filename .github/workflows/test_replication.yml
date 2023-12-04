@@ -44,6 +44,7 @@ jobs:
           pip install -r requirements/docs.txt
           pip install -r requirements/build.txt
           pip install pytest
+          pip install mock
 
       - name: Run tests in multiprocessing mode
         run: |
