@@ -23,6 +23,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Install Node.js and Yarn
+        run: |
+          nodeenv -p --node=16.20.0
+          npm install -g yarn
+
       - name: Create virtual environment
         run: |
           python -m venv venv
@@ -30,9 +35,13 @@ jobs:
 
       - name: Install Python dependencies
         run: |
+          python -m venv venv
+          source venv/bin/activate
           pip install -r requirements.txt --upgrade
           pip install -r requirements/dev.txt --upgrade
           pip install -e .
+          pip install -r requirements/docs.txt
+          pip install -r requirements/build.txt
 
       - name: Run tests in multiprocessing mode
         run: |
