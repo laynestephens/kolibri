@@ -3,12 +3,12 @@ name: Replicate KeyError Issue
 on:
   push:
     branches:
-    - develop
-    - 'release-v**'
+      - develop
+      - 'release-v**'
   pull_request:
     branches:
-    - develop
-    - 'release-v**'
+      - develop
+      - 'release-v**'
 
 jobs:
   replicate_issue:
@@ -23,9 +23,16 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Create virtual environment
         run: |
-          pip install -r requirements/dev.txt
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt --upgrade
+          pip install -r requirements/dev.txt --upgrade
+          pip install -e .
 
       - name: Run tests in multiprocessing mode
         run: |
